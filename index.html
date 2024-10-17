@@ -11,84 +11,10 @@
     <h3>Игра до 5 раундов</h3>
     <p class="human">Пользователь: <span id="human">0</span></p>
     <p class="computer">Компьютер: <span id="computer">0</span></p>
-    <button id="btn">Начать</button>
+    <button id="btnRock">Камень</button>
+    <button id="btnScissors">Ножницы</button>
+    <button id="btnPaper">Бумага</button>
     <div class="result hidden"></div>
-    <script>
-      let humanScore = document.getElementById("human");
-      let computerScore = document.getElementById("computer");
-      let btn = document.getElementById("btn");
-
-      btn.addEventListener("click", function () {
-        // Сбрасываем счетчики
-        humanScore.textContent = 0;
-        computerScore.textContent = 0;
-
-        // Скрываем предыдущий результат
-        let result = document.querySelector(".result");
-        result.classList.add("hidden");
-        result.textContent = "";
-
-        // Удаляем все классы (victory, draw, defeat)
-        result.classList.remove("victory", "draw", "defeat");
-
-        // Начинаем игру
-        for (let i = 0; i < 5; i++) {
-          let getComputerChoice = function () {
-            let choices = ["Камень", "Ножницы", "Бумага"];
-            let randomNumber = Math.floor(Math.random() * 3);
-            return choices[randomNumber];
-          };
-
-          let getHumanChoice = function () {
-            let choice = prompt("Камень, Ножницы или Бумага");
-            choice =
-              choice.charAt(0).toUpperCase() + choice.slice(1).toLowerCase();
-
-            if (
-              choice !== "Камень" &&
-              choice !== "Ножницы" &&
-              choice !== "Бумага"
-            ) {
-              alert("Нужно ввести Камень, Ножницы или Бумага");
-              return getHumanChoice();
-            }
-
-            return choice;
-          };
-
-          let playRound = function (humanChoice, computerChoice) {
-            if (humanChoice === computerChoice) {
-              alert("Ничья");
-            } else if (
-              (humanChoice === "Камень" && computerChoice === "Ножницы") ||
-              (humanChoice === "Ножницы" && computerChoice === "Бумага") ||
-              (humanChoice === "Бумага" && computerChoice === "Камень")
-            ) {
-              humanScore.textContent++;
-              alert("Победа!");
-            } else {
-              computerScore.textContent++;
-              alert("Поражение!");
-            }
-          };
-
-          let humanSelection = getHumanChoice();
-          let computerSelection = getComputerChoice();
-          playRound(humanSelection, computerSelection);
-        }
-
-        // Показываем результат после 5 раундов
-        if (humanScore.textContent === computerScore.textContent) {
-          result.textContent = "Ничья";
-          result.classList.add("draw");
-        } else if (humanScore.textContent > computerScore.textContent) {
-          result.textContent = "Победа!";
-          result.classList.add("victory");
-        } else {
-          result.classList.add("defeat");
-        }
-        result.classList.remove("hidden");
-      });
-    </script>
   </body>
+  <script src="script.js"></script>
 </html>
